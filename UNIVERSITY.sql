@@ -1,0 +1,89 @@
+CREATE DATABASE UCMS;
+USE UCMS;
+
+CREATE TABLE users (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   username VARCHAR(255) NOT NULL,
+   password CHAR(60) NOT NULL, 
+   email VARCHAR(255) NOT NULL,
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+INSERT INTO USERS (username, password, email) VALUES("JACK", 56565, "jack@gmail.com");
+SELECT * FROM USERS; 
+
+CREATE TABLE CLUBS(
+	clubId INT auto_increment PRIMARY KEY, 
+    clubName VARCHAR(255) NOT NULL, 
+    description VARCHAR(255) NOT NULL, 
+    socMed VARCHAR(255) NOT NULL, 
+    email VARCHAR(255) NOT NULL
+); 
+
+SELECT * FROM CLUBS; 
+
+CREATE TABLE STUDENTS (
+    srn VARCHAR(12) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    dob DATE NOT NULL,
+    department VARCHAR(50) NOT NULL
+); 
+
+ALTER TABLE STUDENTS MODIFY srn VARCHAR(15);
+
+SELECT * FROM STUDENTS;
+
+CREATE TABLE FACULTY (
+    faculty_id INT AUTO_INCREMENT PRIMARY KEY,
+    faculty_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone_no VARCHAR(15) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    clubId INT NOT NULL,
+    FOREIGN KEY (clubId) REFERENCES CLUBS(clubId)
+);  
+
+
+SELECT * FROM FACULTY; 
+
+SELECT
+    FACULTY.faculty_id,
+    FACULTY.faculty_name,
+    FACULTY.email,
+    FACULTY.phone_no,
+    FACULTY.department,
+    CLUBS.clubName
+FROM
+    FACULTY
+INNER JOIN
+    CLUBS ON FACULTY.clubId = CLUBS.clubId;
+
+SELECT 
+	SC.srn,
+    S.name,
+    SC.clubId,
+    C.clubName,
+    SC.role,
+    SC.domain 
+FROM 
+	STUDENTCLUBS SC 
+INNER JOIN 
+	STUDENTS S ON SC.srn = S.srn
+INNER JOIN 
+	CLUBS C ON SC.clubId = C.clubId; 
+
+CREATE TABLE studentclubs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    srn VARCHAR(15) NOT NULL,
+    clubId INT NOT NULL,
+    role VARCHAR(20) NOT NULL,
+    domain VARCHAR(30),
+    FOREIGN KEY (srn) REFERENCES students(srn) ON DELETE CASCADE,
+    FOREIGN KEY (clubId) REFERENCES clubs(clubId) ON DELETE CASCADE
+);
+
+SELECT * FROM STUDENTCLUBS;
+
+DELETE FROM STUDENTS;
+
