@@ -47,7 +47,7 @@ const Update = () => {
 
   const handleSend = async (e) => {
     e.preventDefault();
-    console.log(userName);
+    // console.log(userName);
 
     if (!userName || !email || !password) {
       toast.error('Please fill in all fields');

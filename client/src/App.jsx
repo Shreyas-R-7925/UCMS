@@ -1,9 +1,10 @@
 import React from 'react' 
 import { BrowserRouter, Link, Route, Routes} from 'react-router-dom';
 // import {logo} from './assets'; 
-import {Home, Create, Read, Update, Delete} from './pages'; 
+import {Home, Create, Read, AddClub, AddStudent, AddFaculty, AddMembership, ReadClub, ReadFaculty, ReadStudent, ReadMembership,
+UpdateClub, UpdateFaculty, UpdateMembership, UpdateStudent} from './pages'; 
 import {ToastContainer} from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';  
 
 const App = () => {
   return ( 
@@ -17,11 +18,12 @@ const App = () => {
           </div>
         </Link>
         <span>
-          <Link to="/create" className="font-inter font-medium text-black px-4 py-2 rounded-md">Create</Link>
-          <Link to="/read" className="font-inter font-medium text-black px-4 py-2 rounded-md">Read</Link>
-          <Link to="/update" className="font-inter font-medium text-black px-4 py-2 rounded-md">Update</Link>
-          <Link to="/delete" className="font-inter font-medium text-black px-4 py-2 rounded-md">Delete</Link>
-        </span>
+          <Link to="/create" className="font-mono text-lg bg-lime-300 text-black px-4 py-2 rounded-md">Create</Link>
+          &nbsp;
+          <Link to="/read" className="font-mono text-lg bg-lime-300 text-black px-4 py-2 rounded-md">Read</Link> 
+          &nbsp;
+          <Link to="/query" className="font-mono text-lg bg-lime-300 text-black px-4 py-2 rounded-md">Query</Link>
+         </span>
         
       </header>
       <ToastContainer position="bottom-right" />
@@ -31,8 +33,18 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<Create />} /> 
           <Route path="/read" element={<Read />} /> 
-          <Route path="/update/:id" element={<Update />} />
-          <Route path="/delete" element={<Delete />} />
+          <Route path="/newClub" element={<AddClub/>} />
+          <Route path="/newStudent" element={<AddStudent/>} />
+          <Route path="/newFaculty" element={<AddFaculty/>} />
+          <Route path="/newMembership" element={<AddMembership/>} />
+          <Route path="/viewClub" element={<ReadClub/>} />
+          <Route path="/viewFaculty" element={<ReadFaculty/>} />
+          <Route path="/viewStudent" element={<ReadStudent/>} />
+          <Route path="/viewMembership" element={<ReadMembership/>} />
+          <Route path="/update-club/:id" element={<UpdateClub />} />
+          <Route path="/update-student/:id" element={<UpdateStudent />} />
+          <Route path="/update-faculty/:id" element={<UpdateFaculty />} />
+          <Route path="/update-membership/:id" element={<UpdateMembership />} />
         </Routes>
       </main> 
       
