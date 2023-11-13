@@ -28,10 +28,10 @@ const ReadMembership = () => {
         }
     }
 
-    const deleteContact = (id) => {
+    const deleteContact = (id, id2) => {
         if(window.confirm("Are you sure that you wanted to delete that entry ?")){ 
-            console.log("id ",id);
-            axios.delete(`http://localhost:5000/api/remove-membership/${id}`)
+            console.log("id srn",id, id2);
+            axios.delete(`http://localhost:5000/api/remove-membership/${id}/${id2}`)
             toast.success("contact deleted successfully") 
             setTimeout(() => loadData(), 500);
         }
@@ -68,7 +68,7 @@ const ReadMembership = () => {
                             <button className="font-inter font-medium bg-[#ffbf00] text-black px-4 py-2 rounded-md">Edit</button>
                             &nbsp; 
                             </Link> 
-                            <button className="font-inter font-medium bg-[#ffbf00] text-black px-4 py-2 rounded-md" onClick={ () => deleteContact(item.clubId)}>Del</button> 
+                            <button className="font-inter font-medium bg-[#ffbf00] text-black px-4 py-2 rounded-md" onClick={ () => deleteContact(item.clubId, item.srn)}>Del</button> 
                         </td>
                     </tr>
                     ))}

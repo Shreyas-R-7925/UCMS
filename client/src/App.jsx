@@ -5,6 +5,7 @@ import {Home, Create, Read, AddClub, AddStudent, AddFaculty, AddMembership, Read
 UpdateClub, UpdateFaculty, UpdateMembership, UpdateStudent} from './pages'; 
 import {ToastContainer} from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';  
+import Query from './pages/Query';
 
 const App = () => {
   return ( 
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/update-student/:id" element={<UpdateStudent />} />
           <Route path="/update-faculty/:id" element={<UpdateFaculty />} />
           <Route path="/update-membership/:id" element={<UpdateMembership />} />
+          <Route path="/query" element={<Query />} />
         </Routes>
       </main> 
       

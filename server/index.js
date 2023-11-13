@@ -8,7 +8,7 @@ const cors = require("cors");
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "", // Update with your actual MySQL password
+  password: "Shr@2156", // Update with your actual MySQL password
   database: "ucms"
 });
 
@@ -262,10 +262,10 @@ app.delete("/api/remove-faculty/:id", (req,res) => {
 });  
 
 // removing membership
-app.delete("/api/remove-membership/:id", (req, res) => {
-  const { id } = req.params;
-  const sqlRemove = "DELETE FROM STUDENTCLUBS WHERE clubId = ?";
-  db.query(sqlRemove, id, (error, result) => {
+app.delete("/api/remove-membership/:id/:id2", (req, res) => {
+  const { id, id2 } = req.params;
+  const sqlRemove = "DELETE FROM STUDENTCLUBS WHERE clubId = ? and srn = ?";
+  db.query(sqlRemove, [id, id2], (error, result) => {
       if (error) {
           console.log(error);
           res.status(500).json({ error: "An error occurred while deleting the membership" });
@@ -275,6 +275,65 @@ app.delete("/api/remove-membership/:id", (req, res) => {
   });
 });
 
+//---------------------------------------------------------------------------------------------------
+
+app.post("/api/execute-query-by-index", (req, res) => {
+  const { queryIndex } = req.body;
+  console.log("Received query index:", queryIndex);
+
+  // Check if the index is valid
+  if (queryIndex >=0 && queryIndex < 7)
+  {
+    let queryToExecute;
+
+    
+    switch (queryIndex) {
+      case 0:
+        queryToExecute = "SELECT  clubName,socMed from clubs";
+        break;
+      case 1:
+        queryToExecute = "SELECT faculty_name,phone_no FROM faculty where faculty_id = 1";
+        break;
+      case 2:
+        queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs GROUP BY srn HAVING COUNT(DISTINCT clubId) > 1)";
+        break;
+      case 3:
+        queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs WHERE role = 'President/ Club Head' AND srn = students.srn)";
+        break;
+      case 4:
+        queryToExecute = "SELECT c.clubName FROM clubs c WHERE EXISTS (SELECT 1 FROM studentclubs sc1 JOIN students s ON sc1.srn = s.srn WHERE sc1.clubId = c.clubId GROUP BY s.srn HAVING COUNT(DISTINCT s.domain) > 1);" 
+        break;
+      case 5:
+        queryToExecute = "CALL GetClubMemberCount(1)"
+        break;
+
+      default:
+        // Handle unexpected indexes
+        console.error("Invalid query index.");
+        return res.status(400).json({ error: "Invalid query index." });
+    }
+
+    // Execute the SELECT query
+    db.query(queryToExecute, (error, result) => 
+    {
+      if (error) 
+      {
+        console.error("Error executing query:", error);
+        res.status(500).json({ error: "An error occurred while executing the query" });
+      } else 
+      {
+        console.log("Query execution completed.");
+        res.status(200).json({ result });
+      }
+    });
+
+  } 
+  else 
+  {
+    console.error("Invalid query index.");
+    res.status(400).json({ error: "Invalid query index." });
+  }
+});
 
 //---------------------------------------------------------------------------------------------------
 
