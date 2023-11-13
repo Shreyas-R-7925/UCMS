@@ -8,7 +8,7 @@ const cors = require("cors");
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "Shr@2156", // Update with your actual MySQL password
+  password: "", // Update with your actual MySQL password
   database: "ucms"
 });
 
@@ -74,6 +74,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // CREATE
 // new club  
+
 app.post("/api/add-club", (req, res) => {
   const { clubName, description, socMed, email } = req.body;
   const sqlInsert = "INSERT INTO CLUBS (clubName, description, socMed, email) VALUES(?,?,?,?)";
@@ -337,6 +338,73 @@ app.post("/api/execute-query-by-index", (req, res) => {
 
 //---------------------------------------------------------------------------------------------------
 
+
+//Query Execution
+
+app.post("/api/execute-query-by-index", (req, res) => {
+  const { queryIndex } = req.body;
+  console.log("Received query index:", queryIndex);
+
+  // Check if the index is valid
+  if (queryIndex >=0 && queryIndex < 7)
+  {
+    let queryToExecute;
+
+    
+    switch (queryIndex) {
+      case 0: //simple
+        queryToExecute = "SELECT  clubName,socMed from clubs";
+        break;
+      case 1: //simple
+        queryToExecute = "SELECT faculty_name,phone_no FROM faculty where faculty_id = 1";
+        break;
+      case 2: // nested
+        queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs GROUP BY srn HAVING COUNT(DISTINCT clubId) > 1)";
+        break;
+      case 3: //Nested
+      queryToExecute = "SELECT students.srn, students.name FROM students JOIN studentclubs ON students.srn = studentclubs.srn WHERE studentclubs.role = 'P'";
+        break;
+      case 4: // Corealted
+        queryToExecute = "SELECT s.srn, s.name FROM students s WHERE (SELECT COUNT(DISTINCT sc.clubId) FROM studentclubs sc WHERE sc.srn = s.srn) = (SELECT MAX(clubCount) FROM (SELECT COUNT(DISTINCT sc.clubId) AS clubCount FROM studentclubs sc GROUP BY sc.srn ) AS maxClubCount)" 
+        break;
+      case 5: // Procedure
+        queryToExecute = "CALL GetClubMemberCount(1)"
+        break;
+              
+      // triggers for inserting into club
+
+
+      default:
+        // Handle unexpected indexes
+        console.error("Invalid query index.");
+        return res.status(400).json({ error: "Invalid query index." });
+    }
+
+    // Execute the SELECT query
+    db.query(queryToExecute, (error, result) => 
+    {
+      if (error) 
+      {
+        console.error("Error executing query:", error);
+        res.status(500).json({ error: "An error occurred while executing the query" });
+      } else 
+      {
+        console.log("Query execution completed.");
+        res.status(200).json({ result });
+      }
+    });
+
+  } 
+  else 
+  {
+    console.error("Invalid query index.");
+    res.status(400).json({ error: "Invalid query index." });
+  }
+});
+
+
+
+//---------------------------------------------------------------------------------------------------
 app.get("/", (req, res) => {
   res.send("Server side");
 });
