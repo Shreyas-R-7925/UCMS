@@ -6,7 +6,7 @@ const QueryTabs = () => {
     'Who is The Faculty Incharge Of CodeChefECC and What is their Contact Number ??',
     'Who are the students In Multiple Clubs ??',
     'List All The Presidents of the Club..',
-    'Find Clubs with Members Who Belong to Multiple Departments..',
+    'List Students Who Are Members of the Most Clubs..',
     'How many Members are in CodeChef Club??'
   ];
 
@@ -76,11 +76,17 @@ const QueryTabs = () => {
         </button>
 
         {queryResult && (
-          <div className="mt-3">
-            <h2>Query Result:</h2>
-            <pre>{JSON.stringify(queryResult, null, 2)}</pre>
-          </div>
-        )}
+        <div className="mt-3">
+          <h2>Query Result:</h2>
+          <pre>
+            {Object.keys(queryResult).map((key) => (
+              <div key={key}>
+                {key}: {JSON.stringify(queryResult[key], null, 2)}
+              </div>
+            ))}
+          </pre>
+        </div>
+      )}
       </div>
     </div>
   );

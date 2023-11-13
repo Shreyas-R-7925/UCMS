@@ -293,24 +293,27 @@ app.post("/api/execute-query-by-index", (req, res) => {
 
     
     switch (queryIndex) {
-      case 0:
+      case 0: //simple
         queryToExecute = "SELECT  clubName,socMed from clubs";
         break;
-      case 1:
+      case 1: //simple
         queryToExecute = "SELECT faculty_name,phone_no FROM faculty where faculty_id = 1";
         break;
-      case 2:
+      case 2: // nested
         queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs GROUP BY srn HAVING COUNT(DISTINCT clubId) > 1)";
         break;
-      case 3:
-        queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs WHERE role = 'President/ Club Head' AND srn = students.srn)";
+      case 3: //Nested
+      queryToExecute = "SELECT students.srn, students.name FROM students JOIN studentclubs ON students.srn = studentclubs.srn WHERE studentclubs.role = 'P'";
         break;
-      case 4:
-        queryToExecute = "SELECT c.clubName FROM clubs c WHERE EXISTS (SELECT 1 FROM studentclubs sc1 JOIN students s ON sc1.srn = s.srn WHERE sc1.clubId = c.clubId GROUP BY s.srn HAVING COUNT(DISTINCT s.domain) > 1);" 
+      case 4: // Corealted
+        queryToExecute = "SELECT s.srn, s.name FROM students s WHERE (SELECT COUNT(DISTINCT sc.clubId) FROM studentclubs sc WHERE sc.srn = s.srn) = (SELECT MAX(clubCount) FROM (SELECT COUNT(DISTINCT sc.clubId) AS clubCount FROM studentclubs sc GROUP BY sc.srn ) AS maxClubCount)" 
         break;
-      case 5:
+      case 5: // Procedure
         queryToExecute = "CALL GetClubMemberCount(1)"
         break;
+              
+      // triggers for inserting into club
+
 
       default:
         // Handle unexpected indexes
