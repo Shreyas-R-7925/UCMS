@@ -299,7 +299,7 @@ app.post("/api/execute-query-by-index", (req, res) => {
         queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs GROUP BY srn HAVING COUNT(DISTINCT clubId) > 1)";
         break;
       case 3:
-        queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs WHERE role = 'President/ Club Head' AND srn = students.srn)";
+        queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs WHERE role = 'P' AND srn = students.srn)";
         break;
       case 4:
         queryToExecute = "SELECT c.clubName FROM clubs c WHERE EXISTS (SELECT 1 FROM studentclubs sc1 JOIN students s ON sc1.srn = s.srn WHERE sc1.clubId = c.clubId GROUP BY s.srn HAVING COUNT(DISTINCT s.domain) > 1);" 

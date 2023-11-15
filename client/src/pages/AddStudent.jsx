@@ -118,7 +118,7 @@ const AddStudent = () => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#6469ff] focus:border-[#6469ff] outline-none block w-full p-3"
             >
                 <option value="CSE">Computer Science Engineering</option>
-                <option value="Info">Information Science</option>  
+                <option value="IS">Information Science</option>  
                 <option value="ECE">Electronic and Communication Engineering</option> 
                 <option value="Mech">Mechanical Engineering</option>
                 <option value="Bio">Bio Technology</option>
