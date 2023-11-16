@@ -59,7 +59,7 @@ const AddFaculty = () => {
   return (
     <div>  
         <div className='flex justify-center mt-[0.25%] mb-[2%]'>
-            <h1 className='font-mono text-2xl'> ADD FACULTY ADVISOR</h1>
+            <h1 className='font-mono font-bold text-purple-400 text-5xl'> ADD FACULTY ADVISOR</h1>
         </div>
         
         <br />
@@ -69,17 +69,17 @@ const AddFaculty = () => {
             <table>
                 <thead>
                     <tr>
-                        <th className="px-6 py-3">Sr. No</th>
-                        <th className="px-6 py-3">Club Name</th>
-                        <th className="px-6 py-3">Club ID</th>
+                        <th className="text-xl text-white px-6 py-3">Sr. No</th>
+                        <th className="text-xl text-white px-6 py-3">Club Name</th>
+                        <th className="text-xl text-white px-6 py-3">Club ID</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
-                    <tr key={item.id}>
-                        <td className="px-6 py-3">{index + 1}</td>
-                        <td className="px-6 py-3">{item.clubName}</td>
-                        <td className="px-6 py-3">{item.clubId}</td>
+                    <tr key={item.id} className={index % 2 === 0 ? 'bg-gray-300' : 'bg-gray-400'}>
+                        <td className="text-lg font-bold px-6 py-3">{index + 1}</td>
+                        <td className="text-lg font-bold px-6 py-3">{item.clubName}</td>
+                        <td className="text-lg font-bold px-6 py-3">{item.clubId}</td>
                     </tr>
                     ))}
                 </tbody>
@@ -87,7 +87,7 @@ const AddFaculty = () => {
 
         </div>
         
-        <form className='mr-[20%] ml-[20%] mt-[2%]' onSubmit={handleSend}>
+        <form className='mr-[20%] ml-[20%] mt-[2%] mb-[3%]' onSubmit={handleSend}>
             <FormField
                 labelName="Faculty Name"
                 type="text" 
@@ -119,7 +119,7 @@ const AddFaculty = () => {
             />
 
 <div className="mb-4">
-            <label htmlFor="department" className="block text-base text-gray-900">
+            <label htmlFor="department" className="block font-mono text-xl text-green-300">
                 Branch
             </label>
             <select
@@ -129,10 +129,10 @@ const AddFaculty = () => {
                 onChange={handleInputChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#6469ff] focus:border-[#6469ff] outline-none block w-full p-3"
             >
-                <option value="CSE">Computer Science Engineering</option>
-                <option value="Info">Information Science</option>  
-                <option value="ECE">Electronic and Communication Engineering</option> 
                 <option value="Mech">Mechanical Engineering</option>
+                <option value="CSE">Computer Science Engineering</option>
+                <option value="IS">Information Science</option>  
+                <option value="ECE">Electronic and Communication Engineering</option> 
                 <option value="Bio">Science and Humanities</option>
                 <option value="AI/ML">AI/ML</option>
 
@@ -150,7 +150,7 @@ const AddFaculty = () => {
             />
 
             <div className='float-right'>
-              <input type="submit" value="Save" className='bg-[#ffbfbb] px-2 py-2 rounded-md'/>
+              <input type="submit" value="Save" className='bg-purple-300 font-bold px-4 py-2 rounded-md'/>
             </div>
         </form>
     </div>

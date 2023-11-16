@@ -26,29 +26,29 @@ const ReadClub = () => {
         }
     }
     return (
-        <div> 
-            <h1 className="text-center font-mono text-2xl">CLUBS</h1> 
+        <div className="flex flex-col items-center justify-center"> 
+            <h1 className="text-center text-purple-400 font-bold font-mono text-5xl mb-[2%]">CLUBS</h1> 
 
             <div className='mt-[20px]'>
 
             <table>
                 <thead>
                     <tr>
-                        <th className="px-6 py-3">Club Name</th>
-                        <th className="px-6 py-3">Club ID</th>
-                        <th className="px-6 py-3">Description</th>
-                        <th className="px-6 py-3">Social Media</th>
-                        <th className="px-6 py-3">Email</th> 
-                        <th className="px-6 py-3">Edit/Delete</th>
+                        <th className="text-white text-lg px-6 py-3">Club Name</th>
+                        <th className="text-white text-lg px-6 py-3">Club ID</th>
+                        <th className="text-white text-lg px-6 py-3">Description</th>
+                        <th className="text-white text-lg px-6 py-3">Soc. Media</th>
+                        <th className="text-white text-lg px-6 py-3">Email</th> 
+                        <th className="text-white text-lg px-6 py-3">Edit/Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
-                    <tr key={item.id}>
-                        <td className="px-6 py-3">{item.clubName}</td>
-                        <td className="px-6 py-3">{item.clubId}</td>
-                        <td className="px-6 py-3">{item.description}</td>
-                        <td className="px-6 py-3"> 
+                    <tr key={item.id} className={index % 2 === 0 ? 'bg-gray-300' : 'bg-gray-400'}>
+                        <td className="text-bold text-lg px-6 py-3">{item.clubName}</td>
+                        <td className="text-bold text-lg px-6 py-3">{item.clubId}</td>
+                        <td className="text-bold text-lg px-6 py-3">{item.description}</td>
+                        <td className="text-bold text-lg px-6 py-3"> 
                             <a href={item.socMed} className="hover:opacity-75 transition-opacity">
                                 <img src={instagram} className='w-10 h-10' alt="" />
                             </a>
@@ -60,10 +60,10 @@ const ReadClub = () => {
                         </td>
                         <td>
                             <Link to={`/update-club/${item.clubId}`}>
-                            <button className="font-inter font-medium bg-[#ffbf00] text-black px-4 py-2 rounded-md">Edit</button>
+                            <button className="font-inter font-bold bg-amber-300 text-black px-4 py-2 rounded-md">Edit</button>
                             &nbsp; 
                             </Link> 
-                            <button className="font-inter font-medium bg-[#ffbf00] text-black px-4 py-2 rounded-md" onClick={ () => deleteContact(item.clubId)}>Del</button> 
+                            <button className="font-inter font-bold bg-red-500 text-black px-4 py-2 rounded-md" onClick={ () => deleteContact(item.clubId)}>Del</button> 
                         </td>
                     </tr>
                     ))}

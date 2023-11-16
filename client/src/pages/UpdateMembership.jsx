@@ -64,7 +64,7 @@ const UpdateMembership = () => {
   return (
     <div>  
         <div className='flex justify-center mt-[0.25%] mb-[2%]'>
-            <h1 className='font-mono text-2xl'> UPDATE ROLES</h1>
+            <h1 className='font-mono text-purple-400 font-bold text-5xl'> UPDATE ROLES</h1>
         </div>
         
         <br />
@@ -74,17 +74,17 @@ const UpdateMembership = () => {
             <table>
                 <thead>
                     <tr>
-                        <th className="px-6 py-3">Sr. No</th>
-                        <th className="px-6 py-3">Club Name</th>
-                        <th className="px-6 py-3">Club ID</th>
+                        <th className="text-white text-lg px-6 py-3">Sr. No</th>
+                        <th className="text-white text-lg px-6 py-3">Club Name</th>
+                        <th className="text-white text-lg px-6 py-3">Club ID</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
-                    <tr key={item.id}>
-                        <td className="px-6 py-3">{index + 1}</td>
-                        <td className="px-6 py-3">{item.clubName}</td>
-                        <td className="px-6 py-3">{item.clubId}</td>
+                    <tr key={item.id} className={index % 2 === 0 ? 'bg-gray-300' : 'bg-gray-400'}>
+                        <td className="font-bold text-lg px-6 py-3">{index + 1}</td>
+                        <td className="font-bold text-lg px-6 py-3">{item.clubName}</td>
+                        <td className="font-bold text-lg px-6 py-3">{item.clubId}</td>
                     </tr>
                     ))}
                 </tbody>
@@ -92,7 +92,7 @@ const UpdateMembership = () => {
 
         </div>
         
-        <form className='mr-[20%] ml-[20%] mt-[2%]' onSubmit={handleSend}>
+        <form className='mr-[20%] ml-[20%] mt-[2%] mb-[4%]' onSubmit={handleSend}>
             <FormField
                 labelName="SRN"
                 type="text" 
@@ -145,7 +145,7 @@ const UpdateMembership = () => {
             
 
             <div className='float-right'>
-              <input type="submit" value="Update" className='bg-[#ffbfbb] px-2 py-2 rounded-md'/>
+              <input type="submit" value="Update" className='bg-amber-300 font-bold font-mono text-lg px-2 py-2 rounded-md'/>
             </div>
         </form>
     </div>

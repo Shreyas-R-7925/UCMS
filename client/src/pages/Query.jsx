@@ -49,13 +49,13 @@ const Query = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-center font-mono text-2xl">Queries Page</h1>
+    <div className="flex flex-col items-center justify-center">
+      <h1 className="text-center font-mono font-bold text-purple-400 text-5xl mb-[2%]">Queries</h1>
 
       <div>
         {queryOptions.map((query, index) => (
           <div key={index} className="mt-4">
-            <label className="block text-gray-700 font-medium">
+            <label className="block text-white font-medium font-sans text-xl">
               <input
                 type="radio"
                 name="queryOption"
@@ -70,14 +70,15 @@ const Query = () => {
 
         <button
           onClick={submitQuery}
-          className="mt-3 font-inter font-medium bg-[#ffbf00] text-black px-4 py-2 rounded-md"
+          className="float-right mt-3 font-mono bg-cyan-400 text-black px-4 py-2 font-bold text-xl rounded-md"
         >
-          Execute Selected Query
+          Execute
         </button>
+          
 
         {queryResult && (
-        <div className="mt-3">
-          <h2>Query Result:</h2>
+        <div className="mt-[12%] text-white text-xl">
+          <h2 className='font-mono font-bold text-3xl text-green-400'>Query Result:</h2>
           <pre>
             {Object.keys(queryResult).map((key) => (
               <div key={key}>
@@ -87,6 +88,8 @@ const Query = () => {
           </pre>
         </div>
       )}
+        
+        
       </div>
     </div>
   );

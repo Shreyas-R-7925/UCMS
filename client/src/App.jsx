@@ -6,30 +6,37 @@ UpdateClub, UpdateFaculty, UpdateMembership, UpdateStudent} from './pages';
 import {ToastContainer} from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';  
 import Query from './pages/Query';
+import { university } from './assets'
 
 const App = () => {
   return ( 
 
     <BrowserRouter>
-      <header className='w-full flex justify-between items-center bg-white sm:px-8 px-4 py-4'>
+      <header className='w-full flex justify-between items-center bg-black sm:px-8 px-4 py-4'>
         <Link to="/">
           <div className='header-logo'>
             {/* <img src={logo} alt="logo" className='w-16 object-contain' /> */}
-            <p class="text-[24px] text-blue-900">UC<span class="text-[24px] text-orange-500">MS</span></p>
+            <p class="flex items-center text-white">
+              <img src={university} class="rounded-lg" alt="" width="50px" />
+              <span class="font-sans text-3xl ml-2">UCMS</span>
+            </p>
+  
           </div>
         </Link>
         <span>
-          <Link to="/create" className="font-mono text-lg bg-lime-300 text-black px-4 py-2 rounded-md">Create</Link>
+          <Link to="/create" className="font-mono font-bold text-lg bg-green-300 text-black px-4 py-2 rounded-md">Create</Link>
           &nbsp;
-          <Link to="/read" className="font-mono text-lg bg-lime-300 text-black px-4 py-2 rounded-md">Read</Link> 
           &nbsp;
-          <Link to="/query" className="font-mono text-lg bg-lime-300 text-black px-4 py-2 rounded-md">Query</Link>
+          <Link to="/read" className="font-mono font-bold text-lg bg-green-300 text-black px-4 py-2 rounded-md">Read</Link> 
+          &nbsp;
+          &nbsp;
+          <Link to="/query" className="font-mono font-bold text-lg bg-green-300 text-black px-4 py-2 rounded-md">Query</Link>
          </span>
         
       </header>
       <ToastContainer position="bottom-right" />
 
-      <main className="sm:p-8 px-4 py-8 w-full bg-[#f9fafe] min-h-[calc(100vh-73px)]">
+      <main className="sm:p-8 px-4 py-8 w-full bg-black min-h-[calc(100vh-73px)]">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<Create />} /> 

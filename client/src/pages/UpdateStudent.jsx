@@ -56,9 +56,9 @@ const UpdateStudent = () => {
   return (
     <div> 
         <div className='flex justify-center mb-[2%]'>
-            <h1 className='font-mono text-2xl'> UPDATE STUDENT </h1>
+            <h1 className='font-mono text-purple-400 font-bold text-5xl'> UPDATE STUDENT </h1>
         </div>
-        <form className='mr-[20%] ml-[20%] mt-[2%]' onSubmit={handleSend}>
+        <form className='mr-[20%] ml-[20%] mt-[2%] mb-[4%]' onSubmit={handleSend}>
             <FormField
                 labelName="Name"
                 type="text" 
@@ -110,7 +110,7 @@ const UpdateStudent = () => {
             />  
 
             <div className="mb-4">
-            <label htmlFor="department" className="block text-base text-gray-900">
+            <label htmlFor="department" className="block text-base font-mono font-bold text-xl text-green-300">
                 Branch
             </label>
             <select
@@ -132,7 +132,7 @@ const UpdateStudent = () => {
 
 
             <div className='float-right'>
-              <input type="submit" value="Update" className='bg-[#ffbfbb] mt-[2%] mb-[30%] px-2 py-2 rounded-md'/>
+              <input type="submit" value="Update" className='bg-amber-300 font-bold font-mono text-lg px-2 py-2 rounded-md'/>
             </div>
         </form>
     </div>

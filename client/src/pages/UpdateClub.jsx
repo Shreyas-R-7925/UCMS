@@ -50,9 +50,9 @@ const UpdateClub = () => {
   return (
     <div>  
         <div className='flex justify-center mt-[0.25%] mb-[2%]'>
-            <h1 className='font-mono text-2xl'> UPDATE CLUB </h1>
+            <h1 className='font-mono text-purple-400 font-bold text-5xl'> UPDATE CLUB </h1>
         </div>
-        <form className='mr-[20%] ml-[20%] mt-[2%]' onSubmit={handleSend}>
+        <form className='mr-[20%] ml-[20%] mt-[2%] mb-[3%]' onSubmit={handleSend}>
             <FormField
                 labelName="Club Name"
                 type="text" 
@@ -94,7 +94,7 @@ const UpdateClub = () => {
             />
 
             <div className='float-right'>
-              <input type="submit" value="Update" className='bg-[#ffbfbb] px-2 py-2 rounded-md'/>
+              <input type="submit" value="Update" className='bg-amber-300 font-bold font-mono text-lg px-2 py-2 rounded-md'/>
             </div>
         </form>
     </div>

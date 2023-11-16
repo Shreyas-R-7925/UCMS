@@ -61,7 +61,7 @@ const AddMembership = () => {
   return (
     <div>  
         <div className='flex justify-center mt-[0.25%] mb-[2%]'>
-            <h1 className='font-mono text-2xl'> ADD ROLES</h1>
+            <h1 className='font-mono font-bold text-purple-400 text-5xl'> ADD ROLES</h1>
         </div>
         
         <br />
@@ -71,17 +71,17 @@ const AddMembership = () => {
             <table>
                 <thead>
                     <tr>
-                        <th className="px-6 py-3">Sr. No</th>
-                        <th className="px-6 py-3">Club Name</th>
-                        <th className="px-6 py-3">Club ID</th>
+                        <th className="text-white text-xl px-6 py-3">Sr. No</th>
+                        <th className="text-white text-xl px-6 py-3">Club Name</th>
+                        <th className="text-white text-xl px-6 py-3">Club ID</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
-                    <tr key={item.id}>
-                        <td className="px-6 py-3">{index + 1}</td>
-                        <td className="px-6 py-3">{item.clubName}</td>
-                        <td className="px-6 py-3">{item.clubId}</td>
+                    <tr key={item.id} className={index % 2 === 0 ? 'bg-gray-300' : 'bg-gray-400'}>
+                        <td className="text-lg font-bold px-6 py-3">{index + 1}</td>
+                        <td className="text-lg font-bold px-6 py-3">{item.clubName}</td>
+                        <td className="text-lg font-bold px-6 py-3">{item.clubId}</td>
                     </tr>
                     ))}
                 </tbody>
@@ -89,7 +89,7 @@ const AddMembership = () => {
 
         </div>
         
-        <form className='mr-[20%] ml-[20%] mt-[2%]' onSubmit={handleSend}>
+        <form className='mr-[20%] ml-[20%] mt-[2%] mb-[3%]' onSubmit={handleSend}>
             <FormField
                 labelName="SRN"
                 type="text" 
@@ -142,7 +142,7 @@ const AddMembership = () => {
             
 
             <div className='float-right'>
-              <input type="submit" value="Save" className='bg-[#ffbfbb] px-2 py-2 rounded-md'/>
+              <input type="submit" value="Save" className='bg-purple-300 font-bold px-4 py-2 rounded-md'/>
             </div>
         </form>
     </div>

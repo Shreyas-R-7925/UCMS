@@ -47,7 +47,7 @@ const AddClub = () => {
   return (
     <div>  
         <div className='flex justify-center mt-[0.25%] mb-[2%]'>
-            <h1 className='font-mono text-2xl'> ADD CLUB </h1>
+            <h1 className='font-mono font-bold text-purple-400 text-5xl'> ADD CLUB </h1>
         </div>
         <form className='mr-[20%] ml-[20%] mt-[2%]' onSubmit={handleSend}>
             <FormField
@@ -55,7 +55,7 @@ const AddClub = () => {
                 type="text" 
                 id="clubName"
                 name="clubName"
-                placeholder="Enter club name"
+                placeholder="Enter the club name."
                 value={state.clubName}
                 onChange={handleInputChange}
             />
@@ -65,13 +65,13 @@ const AddClub = () => {
                 type="text" 
                 id="description"
                 name="description"
-                placeholder="A one line description about the club "
+                placeholder="A one line description about the club."
                 value={state.description}
                 onChange={handleInputChange}
             /> 
 
             <FormField
-                labelName="Social Media Handles"
+                labelName="Social Media Handle"
                 type="text" 
                 id="socMed"
                 name="socMed"
@@ -91,7 +91,7 @@ const AddClub = () => {
             />
 
             <div className='float-right'>
-              <input type="submit" value="Save" className='bg-[#ffbfbb] px-2 py-2 rounded-md'/>
+              <input type="submit" value="Save" className='bg-purple-300 font-bold px-4 py-2 rounded-md'/>
             </div>
         </form>
     </div>
