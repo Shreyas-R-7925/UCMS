@@ -8,7 +8,7 @@ const cors = require("cors");
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "", // Update with your actual MySQL password
+  password: "635103", // Update with your actual MySQL password
   database: "ucms"
 });
 
@@ -289,90 +289,26 @@ app.post("/api/execute-query-by-index", (req, res) => {
 
     
     switch (queryIndex) {
-      case 0:
-        queryToExecute = "SELECT  clubName,socMed from clubs";
+      case 0: // simple
+        queryToExecute = "SELECT  clubName,email from clubs";
         break;
-      case 1:
-        queryToExecute = "SELECT faculty_name,phone_no FROM faculty where faculty_id = 1";
+      case 1: // nested
+        queryToExecute = "SELECT srn,name FROM STUDENTS WHERE srn NOT IN (SELECT srn FROM STUDENTCLUBS);"
         break;
-      case 2:
-        queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs GROUP BY srn HAVING COUNT(DISTINCT clubId) > 1)";
+      case 2: // joins
+        queryToExecute = "SELECT  faculty.faculty_name, clubs.clubName FROM faculty JOIN clubs ON faculty.clubId = clubs.clubId";
         break;
-      case 3:
-        queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs WHERE role = 'P' AND srn = students.srn)";
+      case 3: // nested
+        queryToExecute = "SELECT students.srn, students.name FROM students JOIN studentclubs ON students.srn = studentclubs.srn WHERE studentclubs.role = 'P'";
         break;
-      case 4:
-        queryToExecute = "SELECT c.clubName FROM clubs c WHERE EXISTS (SELECT 1 FROM studentclubs sc1 JOIN students s ON sc1.srn = s.srn WHERE sc1.clubId = c.clubId GROUP BY s.srn HAVING COUNT(DISTINCT s.domain) > 1);" 
-        break;
-      case 5:
-        queryToExecute = "CALL GetClubMemberCount(1)"
-        break;
-
-      default:
-        // Handle unexpected indexes
-        console.error("Invalid query index.");
-        return res.status(400).json({ error: "Invalid query index." });
-    }
-
-    // Execute the SELECT query
-    db.query(queryToExecute, (error, result) => 
-    {
-      if (error) 
-      {
-        console.error("Error executing query:", error);
-        res.status(500).json({ error: "An error occurred while executing the query" });
-      } else 
-      {
-        console.log("Query execution completed.");
-        res.status(200).json({ result });
-      }
-    });
-
-  } 
-  else 
-  {
-    console.error("Invalid query index.");
-    res.status(400).json({ error: "Invalid query index." });
-  }
-});
-
-//---------------------------------------------------------------------------------------------------
-
-
-//Query Execution
-
-app.post("/api/execute-query-by-index", (req, res) => {
-  const { queryIndex } = req.body;
-  console.log("Received query index:", queryIndex);
-
-  // Check if the index is valid
-  if (queryIndex >=0 && queryIndex < 7)
-  {
-    let queryToExecute;
-
-    
-    switch (queryIndex) {
-      case 0: //simple
-        queryToExecute = "SELECT  clubName,socMed from clubs";
-        break;
-      case 1: //simple
-        queryToExecute = "SELECT faculty_name,phone_no FROM faculty where faculty_id = 1";
-        break;
-      case 2: // nested
-        queryToExecute = "SELECT srn, name FROM students WHERE srn IN (SELECT srn FROM studentclubs GROUP BY srn HAVING COUNT(DISTINCT clubId) > 1)";
-        break;
-      case 3: //Nested
-      queryToExecute = "SELECT students.srn, students.name FROM students JOIN studentclubs ON students.srn = studentclubs.srn WHERE studentclubs.role = 'P'";
-        break;
-      case 4: // Corealted
-        queryToExecute = "SELECT s.srn, s.name FROM students s WHERE (SELECT COUNT(DISTINCT sc.clubId) FROM studentclubs sc WHERE sc.srn = s.srn) = (SELECT MAX(clubCount) FROM (SELECT COUNT(DISTINCT sc.clubId) AS clubCount FROM studentclubs sc GROUP BY sc.srn ) AS maxClubCount)" 
+      case 4: // corealted
+        queryToExecute = "SELECT s.srn, s.name FROM students s WHERE (SELECT COUNT(DISTINCT sc.clubId) FROM studentclubs sc WHERE sc.srn = s.srn) = (SELECT MAX(clubCount) FROM (SELECT COUNT(DISTINCT sc.clubId) AS clubCount FROM studentclubs sc GROUP BY sc.srn ) AS maxClubCount)"; 
         break;
       case 5: // Procedure
-        queryToExecute = "CALL GetClubMemberCount(1)"
+        queryToExecute = 'CALL GetAllClubMemberCounts()';
         break;
-              
-      // triggers for inserting into club
 
+      // trigger 
 
       default:
         // Handle unexpected indexes
@@ -401,8 +337,6 @@ app.post("/api/execute-query-by-index", (req, res) => {
     res.status(400).json({ error: "Invalid query index." });
   }
 });
-
-
 
 //---------------------------------------------------------------------------------------------------
 app.get("/", (req, res) => {

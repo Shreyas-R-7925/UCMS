@@ -44,7 +44,7 @@ const AddStudent = () => {
             department,
         })
         .then(()=>{
-            toast.success("Added successfully");
+            toast.success("Student added successfully");
             setState({srn: "", name: "", phone_number:"", email: "", dob:"", department:""});
         })
         .catch((err) => toast.error(err.response.data));

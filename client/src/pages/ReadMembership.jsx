@@ -32,7 +32,7 @@ const ReadMembership = () => {
         if(window.confirm("Are you sure that you wanted to delete that entry ?")){ 
             console.log("id srn",id, id2);
             axios.delete(`http://localhost:5000/api/remove-membership/${id}/${id2}`)
-            toast.success("contact deleted successfully") 
+            toast.success("Role deleted successfully") 
             setTimeout(() => loadData(), 500);
         }
     }

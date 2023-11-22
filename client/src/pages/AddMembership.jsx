@@ -52,7 +52,7 @@ const AddMembership = () => {
             domain,
         })
         .then(()=>{
-            toast.success("Added successfully");
+            toast.success("Role added successfully");
             setState({srn:"", club_Id:"", role:"", domain:"" });
         })
         .catch((err) => toast.error(err.response.data));

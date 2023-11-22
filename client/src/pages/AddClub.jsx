@@ -38,7 +38,7 @@ const AddClub = () => {
             email,
         })
         .then(()=>{
-            toast.success("Added successfully");
+            toast.success("Club added successfully");
             setState({clubName: "", description:"", socMed:"", email: ""});
         })
         .catch((err) => toast.error(err.response.data));

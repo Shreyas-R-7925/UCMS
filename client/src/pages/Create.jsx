@@ -6,26 +6,26 @@ const Create = () => {
     return (
         <div className="mt-[6%] flex flex-col items-center justify-center">
                 <div>
-                <Link to="/newClub" className="font-mono text-2xl font-bold bg-sky-200 text-black mr-14 px-4 py-2 rounded-md">ADD CLUB</Link>
+                <Link to="/newClub" className="font-mono text-2xl font-bold bg-sky-200 text-black mr-13 px-4 py-2 rounded-md">ADD CLUB</Link>
                 </div> 
                 <br /> 
                 <br />
                 <div>
-                <Link to="/newStudent" className="font-mono text-2xl font-bold bg-sky-400 text-black mr-4 px-4 py-2 rounded-md">ADD STUDENT</Link>
+                <Link to="/newStudent" className="font-mono text-2xl font-bold bg-sky-400 text-black mr-2 px-4 py-2 rounded-md">ADD STUDENT</Link>
                 </div> 
                 <br /> 
                 <br />
                 
                 
                 <div>
-                <Link to="/newFaculty" className="font-mono text-2xl font-bold bg-sky-200 text-black mr-4 px-4 py-2 rounded-md">ADD FACULTY</Link>
+                <Link to="/newFaculty" className="font-mono text-2xl font-bold bg-sky-200 text-black mr-3 px-4 py-2 rounded-md">ADD FACULTY</Link>
                 </div>  
 
                 <br />  
                 <br />
 
                 <div>
-                <Link to="/newMembership" className="font-mono text-2xl font-bold bg-sky-400 text-black mr-10 px-4 py-2 rounded-md">ADD ROLES</Link>
+                <Link to="/newMembership" className="font-mono text-2xl font-bold bg-sky-400 text-black mr-4 px-4 py-2 rounded-md">ADD ROLES</Link>
                 </div>
                 
         </div>

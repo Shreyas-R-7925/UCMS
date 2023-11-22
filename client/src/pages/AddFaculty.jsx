@@ -50,7 +50,7 @@ const AddFaculty = () => {
             club_Id,
         })
         .then(()=>{
-            toast.success("Added successfully");
+            toast.success("Faculty added successfully");
             setState({faculty_name:"", email:"", phone_no:"", department:"", club_Id:"" });
         })
         .catch((err) => toast.error(err.response.data));

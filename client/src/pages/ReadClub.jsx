@@ -21,7 +21,7 @@ const ReadClub = () => {
         if(window.confirm("Are you sure that you wanted to delete that entry ?")){ 
             console.log(id);
             axios.delete(`http://localhost:5000/api/remove-club/${id}`)
-            toast.success("contact deleted successfully") 
+            toast.success("Club deleted successfully") 
             setTimeout(() => loadData(), 500);
         }
     }

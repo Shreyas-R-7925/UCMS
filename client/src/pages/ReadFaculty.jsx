@@ -19,7 +19,7 @@ const ReadFaculty = () => {
         if(window.confirm("Are you sure that you wanted to delete that entry ?")){ 
             console.log(id);
             axios.delete(`http://localhost:5000/api/remove-faculty/${id}`)
-            toast.success("contact deleted successfully") 
+            toast.success("Faculty deleted successfully") 
             setTimeout(() => loadData(), 500);
         }
     }

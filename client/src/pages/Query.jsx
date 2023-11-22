@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
 const Query = () => {
-  const queryOptions = [
-    'What are the URL of Insta IDs for Each Club ??',
-    'Who is The Faculty Incharge Of CodeChefECC and What is their Contact Number ??',
+  const queryOptions = 
+  [
+    'List the Email IDs of All Clubs.',
+    'List Students who are not part of any Club.',
+    'List Faculty members associated with each club.',
+    'List the presidents of each club.',
     'Who are the students In Multiple Clubs ??',
-    'List All The Presidents of the Club..',
-    'List Students Who Are Members of the Most Clubs..',
-    'How many Members are in CodeChef Club??'
+    'List the number of members belonging to each club.'
   ];
 
   const [selectedQueryIndex, setSelectedQueryIndex] = useState(null);
@@ -52,7 +53,7 @@ const Query = () => {
     <div className="flex flex-col items-center justify-center">
       <h1 className="text-center font-mono font-bold text-purple-400 text-5xl mb-[2%]">Queries</h1>
 
-      <div>
+      <div classname = "mb-[8%]" >
         {queryOptions.map((query, index) => (
           <div key={index} className="mt-4">
             <label className="block text-white font-medium font-sans text-xl">
@@ -75,19 +76,53 @@ const Query = () => {
           Execute
         </button>
           
-
-        {queryResult && (
-        <div className="mt-[12%] text-white text-xl">
-          <h2 className='font-mono font-bold text-3xl text-green-400'>Query Result:</h2>
-          <pre>
-            {Object.keys(queryResult).map((key) => (
-              <div key={key}>
-                {key}: {JSON.stringify(queryResult[key], null, 2)}
-              </div>
+  {
+  queryResult && 
+  (<div className="text-2xl mt-[14%] mb-[15%] text-green-300 font-mono font-bold">
+    <h2> Result :</h2>
+    {selectedQueryIndex === 5 ? (
+      // Handle stored procedure result
+      <div>
+        {queryResult.result[0].map((club, index) => (
+          <div key={index}>
+            <strong >Club Name:</strong> {club.clubName} <br/>
+            <strong >Member Count:</strong> {club.memberCount}
+          </div>
+        ))}
+      </div>
+    ) : Array.isArray(queryResult.result) ? (
+      // Display regular SQL query result as a table
+      <table>
+        {/* Display table headers */}
+        <thead>
+          <tr>
+            {Object.keys(queryResult.result[0]).map((key) => (
+              <th classname = "text-white" key={key}>
+                {key}
+              </th>
             ))}
-          </pre>
-        </div>
-      )}
+          </tr>
+        </thead>
+        {/* Display table rows */}
+        <tbody classname = "mt-[2%]">
+          {queryResult.result.map((item, index) => (
+            <tr key={item.id} className={index % 2 === 0 ? 'bg-gray-300' : 'bg-gray-400'}>
+              {Object.values(item).map((value, index) => (
+                <td key={index} className="text-lg text-black">
+                  {value}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      // Display non-dictionary JSON content
+      <pre>{JSON.stringify(queryResult.result, null, 2)}</pre>
+    )}
+  </div>
+)}
+        
         
         
       </div>
